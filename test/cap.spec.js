@@ -23,11 +23,12 @@ describe('Reductio cap', function () {
         reducer(group);
     });
 
-    it('has three groups', function () {
+    it('has three groups', function (done) {
         expect(group.post().cap(3)().length).toEqual(3);
+        done();
     });
 
-    it('groups have the right sums', function(){
+    it('groups have the right sums', function(done){
         var values = {};
         group.post().cap(3)().forEach(function(d){
             values[d.key] = d.value;
@@ -36,31 +37,37 @@ describe('Reductio cap', function () {
         expect(values[1].sum).toBe(2);
         expect(values[2].sum).toBe(2);
         expect(values.Others.sum).toBe(4);
+        done();
     });
 
-    it('plays nicely with count', function(){
+    it('plays nicely with count', function(done){
         expect(group.post().cap(3)().pop().value.count).toBe(4);
+        done();
     });
 
-    it('plays nicely with avg', function(){
+    it('plays nicely with avg', function(done){
         expect(group.post().cap(3)().pop().value.avg).toBe(1);
+        done();
     });
 
-    it('seperate instances can be created', function(){
+    it('seperate instances can be created', function(done){
         var post1 = group.post().cap(3);
         var post2 = group.post().cap(4);
         expect(post1().length).toBe(3);
         expect(post2().length).toBe(4);
+        done();
     });
 
-    it('returns the whole array when it\'s length equals the cap', function(){
+    it('returns the whole array when it\'s length equals the cap', function(done){
         var val = group.post().cap(6)().pop();
         expect(val.key).not.toEqual('Others');
+        done();
     });
 
-    it('can rename the others grouping key', function(){
+    it('can rename the others grouping key', function(done){
         var val = group.post().cap(3, 'Hot damn that woman is a man')().pop();
         expect(val.key).toBe('Hot damn that woman is a man');
+        done();
     });
 
 });

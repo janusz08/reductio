@@ -26,6 +26,7 @@ describe('Reductio minimum', function () {
 
     it('has three groups', function (topic) {
         expect(min.top(Infinity).length).toEqual(3);
+        topic();
     });
 
     it('grouping have the right minimums', function (topic) {
@@ -49,6 +50,7 @@ describe('Reductio minimum', function () {
         expect(Math.round(values['one'].min)).toEqual(Math.round(1));
         expect(Math.round(values['two'].min)).toEqual(Math.round(2));
         expect(Math.round(values['three'].min)).toEqual(Math.round(3));
+        topic();
 
     });
 });

@@ -26,11 +26,12 @@ describe('Reductio histogram', function () {
         reducer(group);
     });
 
-    it('has three groups', function () {
+    it('has three groups', function (done) {
         expect(group.top(Infinity).length).toEqual(3);
+        done();
     });
 
-    it('grouping have the right histograms', function () {
+    it('grouping have the right histograms', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -51,9 +52,10 @@ describe('Reductio histogram', function () {
         expect(values['one'].histogram.map(function(d) { return d.y; })).toEqual([1,2,0]);
         expect(values['two'].histogram.map(function(d) { return d.y; })).toEqual([0,1,1]);
         expect(values['three'].histogram.map(function(d) { return d.y; })).toEqual([0,1,0]);
+        done();
     });
 
-    it('grouping plays nicely with count', function () {
+    it('grouping plays nicely with count', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -62,5 +64,6 @@ describe('Reductio histogram', function () {
         expect(values['one'].count).toEqual(3);
         expect(values['two'].count).toEqual(2);
         expect(values['three'].count).toEqual(1);
+        done();
     });
 });

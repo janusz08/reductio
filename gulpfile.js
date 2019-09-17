@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 
-var uglify = require('gulp-uglify');
+//var uglify = require('gulp-uglify-es');
+var terser = require('gulp-terser');
+var babel = require('gulp-babel');
 var rename = require('gulp-rename');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
@@ -8,7 +10,8 @@ var streamify = require('gulp-streamify');
 var shim = require('browserify-shim');
 // var Gitdown = require('gitdown');
 var bump = require('gulp-bump');
-var karma = require('gulp-karma');
+//var karma = require('gulp-karma');
+var Server = require('karma').Server;
 
 var testFiles = [
 	'node_modules/crossfilter2/crossfilter.min.js',
@@ -23,8 +26,12 @@ gulp.task('scripts', function () {
 		.bundle()
 		.pipe(source('reductio.js'))
         .pipe(gulp.dest('./'))
-        .pipe(rename('reductio.min.js'))
-        .pipe(streamify(uglify()))
+		.pipe(rename('reductio.min.js'))
+		//.pipe(babel({
+		//	presets: ['es2015']
+		//  }))
+		.pipe(streamify(terser()))
+        //.pipe(streamify(uglify()))
         .pipe(gulp.dest('./'));
 });
 
@@ -52,6 +59,9 @@ gulp.task('watch', function() {
     gulp.watch('./docs/*', ['docs']);
 });
 
+
+/*
+
 gulp.task('test', function () {
 	return gulp.src(testFiles)
 		.pipe(karma({
@@ -63,6 +73,14 @@ gulp.task('test', function () {
 		  throw err;
 		});
 });
+*/
+
+gulp.task('test', function (done) {
+	new Server({
+	  configFile: __dirname + '/karma.conf.js',
+	  singleRun: true
+	}, done).start();
+  });
 
 gulp.task('testWatch', function () {
 	return gulp.src(testFiles)
@@ -76,5 +94,5 @@ gulp.task('testWatch', function () {
 		});
 });
 
-gulp.task('default', ['scripts', 'docs', 'testWatch', 'watch']);
-gulp.task('all', ['scripts', 'docs', 'test']);
+//gulp.task('default', gulp.series('scripts', 'docs', 'testWatch', 'watch'));
+gulp.task('all', gulp.series('scripts',  'test'));

@@ -22,11 +22,12 @@ describe('Reductio sumOfSq', function () {
         reducer(group);
     });
 
-    it('has three groups', function () {
+    it('has three groups', function (done) {
         expect(group.top(Infinity).length).toEqual(3);
+        done();
     });
 
-    it('grouping have the right sum of squares', function () {
+    it('grouping have the right sum of squares', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -35,9 +36,10 @@ describe('Reductio sumOfSq', function () {
         expect(values['one'].sumOfSq).toEqual(42);
         expect(values['two'].sumOfSq).toEqual(40);
         expect(values['three'].sumOfSq).toEqual(9);
+        done();
     });
 
-    it('grouping plays nicely with count', function () {
+    it('grouping plays nicely with count', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -46,5 +48,6 @@ describe('Reductio sumOfSq', function () {
         expect(values['one'].count).toEqual(3);
         expect(values['two'].count).toEqual(2);
         expect(values['three'].count).toEqual(1);
+        done();
     });
 });

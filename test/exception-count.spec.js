@@ -30,7 +30,7 @@ describe('Reductio exception count', function () {
         expect(group.top(Infinity).length).toEqual(3);
     });
 
-    it('grouping has the right counts', function () {
+    it('grouping has the right counts', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -39,9 +39,10 @@ describe('Reductio exception count', function () {
         expect(values['one'].exceptionCount).toEqual(2);
         expect(values['two'].exceptionCount).toEqual(1);
         expect(values['three'].exceptionCount).toEqual(1);
+        done();
     });
 
-    it('accessor-based grouping has the right counts', function () {
+    it('accessor-based grouping has the right counts', function (done) {
         var values = {};
         accGroup.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -50,5 +51,6 @@ describe('Reductio exception count', function () {
         expect(values['one'].exceptionCount).toEqual(2);
         expect(values['two'].exceptionCount).toEqual(1);
         expect(values['three'].exceptionCount).toEqual(1);
+        done();
     });
 });

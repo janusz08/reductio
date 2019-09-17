@@ -47,6 +47,7 @@ describe('Multiple values', function () {
         expect(vals['one'].count).toEqual(3);
         expect(vals['two'].count).toEqual(2);
         expect(vals['three'].count).toEqual(1);
+        topic();
     });
 
     it('has sums as expected', function (topic) {
@@ -68,6 +69,7 @@ describe('Multiple values', function () {
         expect(vals['one'].sum).toEqual(5);
         expect(vals['two'].sum).toEqual(4);
         expect(vals['three'].sum).toEqual(4);
+        topic();
     });
 
     it('has averages as expected', function (topic) {
@@ -89,5 +91,6 @@ describe('Multiple values', function () {
         expect(Math.round(vals['one'].avg)).toEqual(Math.round(5/3));
         expect(Math.round(vals['two'].avg)).toEqual(Math.round(4/2));
         expect(Math.round(vals['three'].avg)).toEqual(Math.round(4/1));
+        topic();
     });
 });

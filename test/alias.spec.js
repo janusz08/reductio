@@ -28,20 +28,24 @@ describe('Alias function', function () {
         });
     });
 
-    it('has three groups', function () {
+    it('has three groups', function (done) {
         expect(group.top(Infinity).length).toEqual(3);
+        done();
     });
 
-    it('grouping for first alias have the right counts', function () {
+
+    it('grouping for first alias have the right counts', function (done) {
         expect(values['one'].newCount()).toEqual(3);
         expect(values['two'].newCount()).toEqual(2);
         expect(values['three'].newCount()).toEqual(1);
+        done();
     });
 
-    it('groupings for second alias have the right values', function(){
-        expect(values['one'].twoCount()).toMatch(6);
-        expect(values['two'].twoCount()).toMatch(4);
-        expect(values['three'].twoCount()).toMatch(2);
+    it('groupings for second alias have the right values', function(done){
+        expect(values['one'].twoCount()).toEqual(6);
+        expect(values['two'].twoCount()).toEqual(4);
+        expect(values['three'].twoCount()).toEqual(2);
+        done();
     });
 
 });

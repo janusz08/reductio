@@ -27,11 +27,12 @@ describe('Alias property', function () {
         reducer(group);
     });
 
-    it('has three groups', function () {
+    it('has three groups', function (done) {
         expect(group.top(Infinity).length).toEqual(3);
+        done();
     });
 
-    it('grouping have the right counts', function () {
+    it('grouping have the right counts', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -40,9 +41,10 @@ describe('Alias property', function () {
         expect(values['one'].newCount).toEqual(3);
         expect(values['two'].newCount).toEqual(2);
         expect(values['three'].newCount).toEqual(1);
+        done();
     });
 
-    it('grouping have the right averages', function () {
+    it('grouping have the right averages', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -51,9 +53,10 @@ describe('Alias property', function () {
         expect(values['one'].average).toEqual(2);
         expect(values['two'].average).toEqual(2);
         expect(values['three'].average).toEqual(3);
+        done();
     });
 
-    it('grouping have the right descriptions', function () {
+    it('grouping have the right descriptions', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -62,5 +65,6 @@ describe('Alias property', function () {
         expect(values['one'].description).toEqual('one');
         expect(values['two'].description).toEqual('two');
         expect(values['three'].description).toEqual('three');
+        done();
     });
 });

@@ -47,6 +47,7 @@ describe('Reductio std', function () {
 
     it('has three groups', function (topic) {
         expect(std.top(Infinity).length).toEqual(3);
+        topic();
     });
 
     it('grouping have the right averages', function (topic) {
@@ -58,6 +59,7 @@ describe('Reductio std', function () {
         expect(Math.round(values['one'].std)).toEqual(Math.round(2.08167));
         expect(Math.round(values['two'].std)).toEqual(Math.round(2.82843));
         expect(Math.round(values['three'].std)).toEqual(Math.round(0));
+        topic();
     });
 
     it('grouping with .std() but no .sumOfSq() doesn\'t work', function (topic) {
@@ -76,6 +78,7 @@ describe('Reductio std', function () {
         expect(values['one'].std).toBeUndefined();
 
         // Also throws an error on the console, but that's more difficult to test.
+        topic();
     });
 
     it('grouping with .std(accessor) works', function (topic) {
@@ -87,5 +90,6 @@ describe('Reductio std', function () {
         expect(Math.round(values['one'].std)).toEqual(Math.round(2.08167));
         expect(Math.round(values['two'].std)).toEqual(Math.round(2.82843));
         expect(Math.round(values['three'].std)).toEqual(Math.round(0));
+        topic();
     });
 });

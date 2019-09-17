@@ -16,7 +16,7 @@ describe('Reductio filter', function () {
         dim2 = data.dimension(function(d) { return d.foo; });
     });
 
-    it('groups a counting reducer', function() {
+    it('groups a counting reducer', function(done) {
       var reducer = reductio().count(true)
         .filter(function(d) { return d.bar > 3; });
 
@@ -24,9 +24,10 @@ describe('Reductio filter', function () {
       expect(map.one.value.count).toEqual(2);
       expect(map.two.value.count).toEqual(1);
       expect(map.three.value.count).toEqual(0);
+      done();
     });
 
-    it('groups an averaging reducer', function() {
+    it('groups an averaging reducer', function(done) {
       var reducer = reductio()
         .filter(function(d) { return d.bar > 3; })
         .avg(function (d) { return d.bar; });
@@ -35,9 +36,10 @@ describe('Reductio filter', function () {
       expect(map.one.value.avg).toBeCloseTo(4.5);
       expect(map.two.value.avg).toEqual(6);
       expect(map.three.value.avg).toEqual(0);
+      done();
     });
 
-    it('handles value lists', function() {
+    it('handles value lists', function(done) {
       var reducer = reductio();
       reducer.value("gt3").filter(function(d) { return d.bar > 3; }).count(true);
       reducer.value("even").filter(function(d) { return d.bar % 2 === 0; }).count(true);
@@ -49,9 +51,10 @@ describe('Reductio filter', function () {
       expect(map.two.value.even.count).toEqual(2);
       expect(map.three.value.gt3.count).toEqual(0);
       expect(map.three.value.even.count).toEqual(0);
+      done();
     });
 
-    it('handles sparsely-populated data', function() {
+    it('handles sparsely-populated data', function(done) {
       var reducer = reductio()
         .filter(function(d) { return typeof d.sparseVal !== "undefined"; })
         .avg(function(d) { return d.sparseVal; });
@@ -61,8 +64,9 @@ describe('Reductio filter', function () {
       expect(map.one.value.avg).toBeCloseTo(10);
       expect(map.two.value.count).toEqual(0);
       expect(map.three.value.count).toEqual(0);
+      done();
     });
-    it('exposes data lifecycle information from Crossfilter2', function() {
+    it('exposes data lifecycle information from Crossfilter2', function(done) {
       var reducer = reductio();
       reducer.value('addOnly')
         .count(true)
@@ -90,5 +94,6 @@ describe('Reductio filter', function () {
       expect(map.one.value.normal.count).toEqual(2);
       expect(map.two.value.normal.count).toEqual(0);
       expect(map.three.value.normal.count).toEqual(0);
+      done();
     });
 });

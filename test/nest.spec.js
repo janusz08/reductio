@@ -24,11 +24,12 @@ describe('Reductio nest', function () {
         reducer(group);
     });
 
-    it('has two groups', function () {
+    it('has two groups', function (done) {
         expect(group.top(Infinity).length).toEqual(2);
+        done();
     });
 
-    it('grouping have the right nests', function () {
+    it('grouping have the right nests', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -98,5 +99,6 @@ describe('Reductio nest', function () {
         expect(TwoNYCbike.length).toEqual(2);
         expect(TwoLAcars.length).toEqual(1);
         expect(TwoLAbike).toBeUndefined();
+        done();
     });
 });

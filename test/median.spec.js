@@ -27,6 +27,7 @@ describe('Reductio median', function () {
 
     it('has three groups', function (topic) {
         expect(median.top(Infinity).length).toEqual(3);
+        topic();
     });
 
     it('grouping have the right medians', function (topic) {
@@ -50,6 +51,6 @@ describe('Reductio median', function () {
         expect(Math.round(values['one'].median)).toEqual(Math.round(4));
         expect(Math.round(values['two'].median)).toEqual(Math.round(4));
         expect(Math.round(values['three'].median)).toEqual(Math.round(3));
-
+        topic();
     });
 });

@@ -28,12 +28,13 @@ describe('Reductio sum', function () {
         reducerString(groupString);
     });
 
-    it('has three groups', function () {
+    it('has three groups', function (done) {
         expect(group.top(Infinity).length).toEqual(3);
         expect(groupString.top(Infinity).length).toEqual(3);
+        done();
     });
 
-    it('grouping have the right sums', function () {
+    it('grouping have the right sums', function (done) {
         var values = {};
         groupString.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -42,9 +43,10 @@ describe('Reductio sum', function () {
         expect(values['one'].sum).toEqual(10);
         expect(values['two'].sum).toEqual(8);
         expect(values['three'].sum).toEqual(3);
+        done();
     });
 
-    it('string grouping has the right sums', function () {
+    it('string grouping has the right sums', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -53,9 +55,10 @@ describe('Reductio sum', function () {
         expect(values['one'].sum).toEqual(10);
         expect(values['two'].sum).toEqual(8);
         expect(values['three'].sum).toEqual(3);
+        done();
     });
 
-    it('grouping plays nicely with count', function () {
+    it('grouping plays nicely with count', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -64,5 +67,6 @@ describe('Reductio sum', function () {
         expect(values['one'].count).toEqual(3);
         expect(values['two'].count).toEqual(2);
         expect(values['three'].count).toEqual(1);
+        done();
     });
 });

@@ -27,11 +27,12 @@ describe('Reductio sortBy', function () {
         reducer(group);
     });
 
-    it('has six groups', function () {
+    it('has six groups', function (done) {
         expect(group.post().sortBy('value.sum')().length).toEqual(6);
+        done();
     });
 
-    it('orders correctly', function () {
+    it('orders correctly', function (done) {
         var all = group.post().sortBy('value.sum', descending)();
         for(var i = 0; i < all.length; ++i){
             expect(all[i].value.sum).toBe(6-i);
@@ -40,9 +41,10 @@ describe('Reductio sortBy', function () {
         for(i = 0; i < all.length; ++i){
             expect(all[i].value.sum).toBe(i+1);
         }
+        done();
     });
 
-    it('works with functions', function(){
+    it('works with functions', function(done){
         var all = group.post().sortBy(function(d){
             return -d.value.sum;
         })();
@@ -55,13 +57,15 @@ describe('Reductio sortBy', function () {
         for(i = 0; i < all.length; ++i){
             expect(all[i].value.sum).toBe(i+1);
         }
+        done();
     });
 
-    it('works with cap', function(){
+    it('works with cap', function(done){
         var all = group.post().sortBy('value.sum', descending).cap(3)();
         expect(all[0].value.sum).toBe(6);
         expect(all[1].value.sum).toBe(5);
         expect(all[2].value.sum).toBe(10);
+        done();
     });
 
 });

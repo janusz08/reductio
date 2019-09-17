@@ -23,11 +23,12 @@ describe('Reductio value count', function () {
         reducer(group);
     });
 
-    it('has two groups', function () {
+    it('has two groups', function (done) {
         expect(group.top(Infinity).length).toEqual(2);
+        done();
     });
 
-    it('grouping have the right sums', function () {
+    it('grouping have the right sums', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -35,9 +36,10 @@ describe('Reductio value count', function () {
 
         expect(values['one'].sum).toEqual(7);
         expect(values['two'].sum).toEqual(7);
+        done();
     });
 
-    it('properly tracks values', function () {
+    it('properly tracks values', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -45,5 +47,6 @@ describe('Reductio value count', function () {
 
         expect(values['one'].values).toEqual([[1,2],[5,1]]);
         expect(values['two'].values).toEqual([[2,2],[3,1]]);
+        done();
     });
 });

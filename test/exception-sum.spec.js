@@ -22,11 +22,12 @@ describe('Reductio exception sum', function () {
         reducer(group);
     });
 
-    it('has three groups', function () {
+    it('has three groups', function (done) {
         expect(group.top(Infinity).length).toEqual(3);
+        done();
     });
 
-    it('grouping have the right counts', function () {
+    it('grouping have the right counts', function (done) {
         var values = {};
         group.top(Infinity).forEach(function (d) {
             values[d.key] = d.value;
@@ -35,5 +36,6 @@ describe('Reductio exception sum', function () {
         expect(values['one'].exceptionSum).toEqual(3);
         expect(values['two'].exceptionSum).toEqual(2);
         expect(values['three'].exceptionSum).toEqual(3);
+        done();
     });
 });

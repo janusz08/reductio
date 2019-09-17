@@ -31,12 +31,13 @@ describe('groupAll', function () {
         reducer(group);
     });
 
-    it('has five groups', function () {
+    it('has five groups', function (done) {
         expect(group.value().length).toEqual(5);
         expect(group.all().length).toEqual(5);
+        done();
     });
 
-    it('groupings have the right counts', function () {
+    it('groupings have the right counts', function (done) {
         var values = {};
         group.value().forEach(function (d) {
             values[d.key] = d.value;
@@ -63,9 +64,10 @@ describe('groupAll', function () {
         expect(values[3].count).toEqual(3);
         expect(values[4].count).toEqual(2);
         expect(values[5].count).toEqual(2);
+        done();
     });
 
-    it('groupings have the right sums and averages', function () {
+    it('groupings have the right sums and averages', function (done) {
         var values = {};
         group.value().forEach(function (d) {
             values[d.key] = d.value;
@@ -103,5 +105,6 @@ describe('groupAll', function () {
 
         expect(values[1].avg).toEqual(2);
         expect(values[5].avg).toEqual(2);
+        done();
     });
 });

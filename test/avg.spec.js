@@ -47,6 +47,7 @@ describe('Reductio avg', function () {
 
     it('has three groups', function (topic) {
         expect(avg.top(Infinity).length).toEqual(3);
+        topic();
     });
 
     it('grouping have the right averages', function (topic) {
@@ -58,6 +59,7 @@ describe('Reductio avg', function () {
         expect(Math.round(values['one'].avg)).toEqual(Math.round(10/3));
         expect(Math.round(values['two'].avg)).toEqual(Math.round(8/2));
         expect(Math.round(values['three'].avg)).toEqual(Math.round(3/1));
+        topic();
     });
 
     it('grouping with .avg() but no .sum() doesn\'t work', function (topic) {
@@ -76,6 +78,7 @@ describe('Reductio avg', function () {
         expect(values['one'].avg).toBeUndefined();
 
         // Also throws an error on the console, but that's more difficult to test.
+        topic();
     });
 
     it('grouping with .avg(accessor) works', function (topic) {
@@ -87,5 +90,6 @@ describe('Reductio avg', function () {
         expect(Math.round(values['one'].avg)).toEqual(Math.round(10/3));
         expect(Math.round(values['two'].avg)).toEqual(Math.round(8/2));
         expect(Math.round(values['three'].avg)).toEqual(Math.round(3/1));
+        topic();
     });
 });

@@ -91,7 +91,7 @@ module.exports = reductio;
 },{"./accessors.js":2,"./build.js":6,"./parameters.js":19,"./postprocess":20,"./postprocessors":21}],2:[function(require,module,exports){
 var reductio_parameters = require('./parameters.js');
 
-_assign = function assign(target) {
+function assign(target) {
 	if (target == null) {
 		throw new TypeError('Cannot convert undefined or null to object');
 	}
@@ -143,7 +143,7 @@ function accessor_build(obj, p) {
 
 	obj.fromObject = function(value) {
 		if(!arguments.length) return p;
-		_assign(p, value);
+		assign(p, value);
 		return obj;
 	};
 
@@ -648,7 +648,7 @@ var pluck = function(n){
 };
 
 // supported operators are sum, avg, and count
-_grouper = function(path, prior){
+const _grouper = function(path, prior){
     if(!path) path = function(d){return d;};
     return function(p, v){
         if(prior) prior(p, v);
@@ -660,7 +660,7 @@ _grouper = function(path, prior){
     };
 };
 
-reductio_cap = function (prior, f, p) {
+const reductio_cap = function (prior, f, p) {
     var obj = f.reduceInitial();
     // we want to support values so we'll need to know what those are
     var values = p.values ? Object.keys(p.values) : [];
@@ -1076,7 +1076,6 @@ var reductio_nest = {
 	},
 	remove: function (keyAccessors, prior, path) {
 		var arrRef;
-		var nextRef;
 		return function (p, v, nf) {
 			if(prior) prior(p, v, nf);
 
@@ -1202,8 +1201,6 @@ var comparer = function (accessor, ordering) {
         return ordering(accessor(a), accessor(b));
     };
 };
-
-var type = {}.toString;
 
 module.exports = function (prior) {
     return function (value, order) {
