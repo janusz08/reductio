@@ -1,3 +1,5 @@
+var reductio_types = require('./types.js');
+
 var reductio_exception_sum = {
 	add: function (a, sum, prior, path) {
 		var i, curr;
@@ -7,7 +9,7 @@ var reductio_exception_sum = {
 			i = path(p).bisect(path(p).values, a(v), 0, path(p).values.length);
 			curr = path(p).values[i];
 			if((!curr || curr[0] !== a(v)) || curr[1] === 0) {
-				path(p).exceptionSum = path(p).exceptionSum + sum(v);
+				path(p).exceptionSum = reductio_types.numericType().sum(path(p).exceptionSum,  sum(v));
 			}
 			return p;
 		};
@@ -20,7 +22,7 @@ var reductio_exception_sum = {
 			i = path(p).bisect(path(p).values, a(v), 0, path(p).values.length);
 			curr = path(p).values[i];
 			if(curr && curr[0] === a(v) && curr[1] === 1) {
-				path(p).exceptionSum = path(p).exceptionSum - sum(v);
+				path(p).exceptionSum = reductio_types.numericType().sub(path(p).exceptionSum, sum(v));
 			}
 			return p;
 		};
@@ -28,7 +30,7 @@ var reductio_exception_sum = {
 	initial: function (prior, path) {
 		return function (p) {
 			p = prior(p);
-			path(p).exceptionSum = 0;
+			path(p).exceptionSum = reductio_types.numericType().of(0);
 			return p;
 		};
 	}

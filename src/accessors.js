@@ -1,4 +1,5 @@
 var reductio_parameters = require('./parameters.js');
+var reductio_types = require('./types.js');
 
 function assign(target) {
 	if (target == null) {
@@ -43,11 +44,18 @@ function accessor_build(obj, p) {
 		if( typeof v === 'string' ) {
 			// Rewrite to a function
 			var tempValue = v;
-			var func = function (d) { return +d[tempValue]; }
+			//var func = function (d) { return +d[tempValue]; }
+			var func = function (d) { return reductio_types.numericType().of(d[tempValue]); }
 			return func;
 		} else {
 			return v;
 		}
+	}
+
+	obj.useType = function (typeName) {
+		if(!arguments.length) return p;
+		p.numericType = typeName;
+		return obj;
 	}
 
 	obj.fromObject = function(value) {

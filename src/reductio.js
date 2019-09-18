@@ -1,10 +1,11 @@
 var reductio_build = require('./build.js');
+var reduction_types = require('./types.js');
 var reductio_accessors = require('./accessors.js');
 var reductio_parameters = require('./parameters.js');
 var reductio_postprocess = require('./postprocess');
 var crossfilter = require('crossfilter2');
 
-function reductio() {
+function reductio(numericType) {
 	var parameters = reductio_parameters();
 
 	var funcs = {};
@@ -74,8 +75,8 @@ function reductio() {
 
 		return group;
 	}
-
 	reductio_accessors.build(my, parameters);
+	reduction_types.build(numericType, parameters);
 
 	return my;
 }

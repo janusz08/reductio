@@ -22,7 +22,8 @@ var reductio_parameters = function() {
 		aliasPropKeys: false,
 		groupAll: false,
 		dataList: false,
-		custom: false
+		custom: false,
+		numericType : 'Number'
 	};
 };
 
